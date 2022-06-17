@@ -1,8 +1,12 @@
-import React, { useState, Component } from 'react';
-import RocketCore from './RocketCore';
+import React, { useState, Component, useEffect } from "react";
+import RocketCore from "./RocketCore";
 
 export function FunctionalRocket() {
-  const [initialLaunchTime] = useState(Date.now());
+  const [initialLaunchTime, setInitialLaunchTime] = useState(Date.now());
+
+  useEffect(() => {
+    setInitialLaunchTime(false);
+  }, []);
 
   return <RocketCore initialLaunchTime={initialLaunchTime} />;
 }
@@ -12,8 +16,12 @@ export class ClassRocket extends Component {
     super(props);
 
     this.state = {
-      initialLaunchTime: Date.now()
+      initialLaunchTime: Date.now(),
     };
+  }
+
+  componentDidMount() {
+    this.setState({ initialLaunchTime: false });
   }
 
   render() {
